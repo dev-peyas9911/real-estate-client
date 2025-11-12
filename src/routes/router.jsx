@@ -6,6 +6,9 @@ import AllProperties from "../pages/AllProperties";
 import AddProperty from "../pages/AddProperty";
 import MyProperties from "../pages/MyProperties";
 import MyRatings from "../pages/MyRatings";
+import Signin from "../pages/Signin";
+import Signup from "../pages/Signup";
+import PrivateRoute from "../privateRoute/PrivateRoute";
 
 export const router = createBrowserRouter([
   {
@@ -23,16 +26,24 @@ export const router = createBrowserRouter([
       },
       {
         path: "/add-property",
-        Component: AddProperty,
+        element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>,
       },
       {
         path: "/my-properties",
-        Component: MyProperties,
+        element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>,
       },
       {
         path: "/my-ratings",
-        Component: MyRatings,
+        element: <PrivateRoute><MyRatings></MyRatings></PrivateRoute>,
       },
+      {
+        path: "/signin",
+        Component: Signin
+      },
+      {
+        path: "/signup",
+        Component: Signup
+      }
     ],
   },
 ]);

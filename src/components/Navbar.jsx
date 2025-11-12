@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Link, NavLink } from "react-router";
 import { Sun, Moon } from "lucide-react";
+import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 // import { AuthContext } from "../providers/AuthProvider"; // (for later when auth is ready)
 
 const Navbar = () => {
@@ -8,7 +10,20 @@ const Navbar = () => {
   const [theme, setTheme] = useState("light");
 
   // fake user for now
-  const user = null;
+  // const user = null;
+  const { user, setUser, signOutFunc } = useContext(AuthContext);
+
+  const handleSignout = () => {
+    // signOut(auth)
+    signOutFunc()
+      .then(() => {
+        toast.success("Sign out succesfully");
+        setUser(null);
+      })
+      .catch((e) => {
+        toast.error(e.message);
+      });
+  };
 
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -52,36 +67,42 @@ const Navbar = () => {
               All Properties
             </NavLink>
           </li>
-          <li>
-            <NavLink
-              to="/add-property"
-              className={({ isActive }) =>
-                isActive ? "text-primary font-semibold" : ""
-              }
-            >
-              Add Property
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-properties"
-              className={({ isActive }) =>
-                isActive ? "text-primary font-semibold" : ""
-              }
-            >
-              My Properties
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/my-ratings"
-              className={({ isActive }) =>
-                isActive ? "text-primary font-semibold" : ""
-              }
-            >
-              My Ratings
-            </NavLink>
-          </li>
+          {user && (
+            <li>
+              <NavLink
+                to="/add-property"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : ""
+                }
+              >
+                Add Property
+              </NavLink>
+            </li>
+          )}
+          {user && (
+            <li>
+              <NavLink
+                to="/my-properties"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : ""
+                }
+              >
+                My Properties
+              </NavLink>
+            </li>
+          )}
+          {user && (
+            <li>
+              <NavLink
+                to="/my-ratings"
+                className={({ isActive }) =>
+                  isActive ? "text-primary font-semibold" : ""
+                }
+              >
+                My Ratings
+              </NavLink>
+            </li>
+          )}
         </ul>
       </div>
 
@@ -98,7 +119,7 @@ const Navbar = () => {
         {/* Conditional Auth Buttons */}
         {!user ? (
           <>
-            <Link to="/login" className="btn btn-outline btn-primary btn-sm">
+            <Link to="/signin" className="btn btn-outline btn-primary btn-sm">
               Login
             </Link>
           </>
@@ -110,7 +131,7 @@ const Navbar = () => {
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="User" src={user.photoURL} />
+                <img alt="User" src={user?.photoURL} />
               </div>
             </div>
             <ul
@@ -118,13 +139,18 @@ const Navbar = () => {
               className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow"
             >
               <li>
-                <span className="font-semibold">{user.displayName}</span>
+                <span className="font-semibold">{user?.displayName}</span>
               </li>
               <li>
-                <span>{user.email}</span>
+                <span>{user?.email}</span>
               </li>
               <li>
-                <button className="btn btn-error btn-sm mt-2">Log Out</button>
+                <button
+                  onClick={handleSignout}
+                  className="btn btn-error btn-sm mt-2"
+                >
+                  Log Out
+                </button>
               </li>
             </ul>
           </div>
@@ -146,15 +172,21 @@ const Navbar = () => {
           <li>
             <NavLink to="/all-properties">All Properties</NavLink>
           </li>
-          <li>
-            <NavLink to="/add-property">Add Property</NavLink>
-          </li>
-          <li>
-            <NavLink to="/my-properties">My Properties</NavLink>
-          </li>
-          <li>
-            <NavLink to="/my-ratings">My Ratings</NavLink>
-          </li>
+          {user && (
+            <li>
+              <NavLink to="/add-property">Add Property</NavLink>
+            </li>
+          )}
+          {user && (
+            <li>
+              <NavLink to="/my-properties">My Properties</NavLink>
+            </li>
+          )}
+          {user && (
+            <li>
+              <NavLink to="/my-ratings">My Ratings</NavLink>
+            </li>
+          )}
         </ul>
       </div>
     </div>
