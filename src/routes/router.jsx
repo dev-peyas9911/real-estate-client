@@ -3,18 +3,21 @@ import RootLayout from "../layouts/RootLayout";
 import ErrorPage from "../pages/ErrorPage";
 import Home from "../pages/Home";
 import AllProperties from "../pages/AllProperties";
-import AddProperty from "../pages/AddProperty";
 import MyProperties from "../pages/MyProperties";
 import MyRatings from "../pages/MyRatings";
 import Signin from "../pages/Signin";
 import Signup from "../pages/Signup";
 import PrivateRoute from "../privateRoute/PrivateRoute";
+import AddProperties from "../pages/AddProperties";
+import LoadingSpinner from "../pages/LoadingSpinner";
+
 
 export const router = createBrowserRouter([
   {
     path: "/",
     Component: RootLayout,
     errorElement: <ErrorPage></ErrorPage>,
+    hydrateFallbackElement: <LoadingSpinner></LoadingSpinner>,
     children: [
       {
         index: true,
@@ -22,28 +25,41 @@ export const router = createBrowserRouter([
       },
       {
         path: "/all-properties",
-        Component: AllProperties,
+        element: <AllProperties></AllProperties>,
+        loader: () => fetch("http://localhost:3000/models"),
       },
       {
-        path: "/add-property",
-        element: <PrivateRoute><AddProperty></AddProperty></PrivateRoute>,
+        path: "/add-properties",
+        element: (
+          <PrivateRoute>
+            <AddProperties></AddProperties>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-properties",
-        element: <PrivateRoute><MyProperties></MyProperties></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyProperties></MyProperties>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-ratings",
-        element: <PrivateRoute><MyRatings></MyRatings></PrivateRoute>,
+        element: (
+          <PrivateRoute>
+            <MyRatings></MyRatings>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/signin",
-        Component: Signin
+        Component: Signin,
       },
       {
         path: "/signup",
-        Component: Signup
-      }
+        Component: Signup,
+      },
     ],
   },
 ]);

@@ -70,12 +70,12 @@ const Navbar = () => {
           {user && (
             <li>
               <NavLink
-                to="/add-property"
+                to="/add-properties"
                 className={({ isActive }) =>
                   isActive ? "text-primary font-semibold" : ""
                 }
               >
-                Add Property
+                Add Properties
               </NavLink>
             </li>
           )}
@@ -121,6 +121,9 @@ const Navbar = () => {
           <>
             <Link to="/signin" className="btn btn-outline btn-primary btn-sm">
               Login
+            </Link>
+            <Link to="/signup" className="btn btn-primary btn-sm">
+              Sign up
             </Link>
           </>
         ) : (
@@ -174,7 +177,7 @@ const Navbar = () => {
           </li>
           {user && (
             <li>
-              <NavLink to="/add-property">Add Property</NavLink>
+              <NavLink to="/add-properties">Add Properties</NavLink>
             </li>
           )}
           {user && (
