@@ -1,16 +1,37 @@
-# React + Vite
+# 🏠 Real Estate Hub
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern real estate single-page web application built with **React**, designed to help users explore, view, and manage property listings easily and efficiently.
 
-Currently, two official plugins are available:
+## 🌐 Live Site
+🔗 [Visit Real Estate Hub](https://your-live-site-url.netlify.app)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## React Compiler
+## 🚀 Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- 🏡 **Dynamic Property Listings** – Displays properties fetched from MongoDB, sorted by newest listings first.  
+- 🔐 **Secure Authentication** – Firebase-based email/password and Google login system.  
+- 🌗 **Light & Dark Theme** – Toggle between light and dark modes using DaisyUI themes.  
+- 🧭 **Smooth Navigation** – Implemented with React Router for a single-page app experience.  
+- 🔔 **User Notifications** – Toastify used for real-time feedback on login, signup, and CRUD actions.  
+- 🎠 **Interactive UI Elements** – Swiper sliders, carousels, and responsive Tailwind CSS components.  
+- 🌀 **Loading Spinners** – Beautiful loading indicators enhance user experience.  
+- 📱 **Fully Responsive Design** – Optimized for all devices from mobile to desktop.
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **Frontend:** React, React Router, Tailwind CSS, DaisyUI  
+- **Backend:** Node.js, Express.js, MongoDB (for property data)  
+- **Authentication:** Firebase Auth (Email/Password + Google)  
+- **UI Libraries:** Swiper, Toastify, Spinner, Carousel  
+- **Hosting:** Netlify / Vercel  
+
+---
+
+## 📦 Installation & Setup
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/real-estate-hub.git
