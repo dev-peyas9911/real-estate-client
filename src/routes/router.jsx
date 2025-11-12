@@ -10,6 +10,7 @@ import Signup from "../pages/Signup";
 import PrivateRoute from "../privateRoute/PrivateRoute";
 import AddProperties from "../pages/AddProperties";
 import LoadingSpinner from "../pages/LoadingSpinner";
+import PropertyDetails from "../pages/PropertyDetails";
 
 
 export const router = createBrowserRouter([
@@ -60,6 +61,11 @@ export const router = createBrowserRouter([
         path: "/signup",
         Component: Signup,
       },
+      {
+        path: "/properties/:id",
+        element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>,
+        loader: ({params}) => fetch(`http://localhost:3000/models/${params.id}`)
+      }
     ],
   },
 ]);
