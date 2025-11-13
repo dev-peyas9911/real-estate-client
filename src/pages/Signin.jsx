@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router";
 import { toast } from "react-toastify";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -19,10 +19,11 @@ const Signin = () => {
   const from = location.state || "/";
   const navigate = useNavigate();
 
+  useEffect(() => {
   if (user) {
     navigate("/");
-    return;
   }
+}, [user, navigate]);
 
 
 
@@ -51,7 +52,7 @@ const Signin = () => {
     // signInWithPopup(auth, googleProvider)
     signInWithGoogleFunc()
       .then((res) => {
-        console.log(res.user);
+        // console.log(res.user);
         setLoading(false);
         setUser(res.user);
         toast.success("Logged in succesfully");
