@@ -13,7 +13,7 @@ const UpdateProperty = () => {
 
   // Fetch current property data
   useEffect(() => {
-    fetch(`http://localhost:3000/models/${id}`)
+    fetch(`https://real-estate-server-blue.vercel.app/models/${id}`)
       .then((res) => res.json())
       .then((data) => {
         // console.log(data.result);
@@ -43,7 +43,7 @@ const UpdateProperty = () => {
       userEmail: user.email,
     };
 
-    fetch(`http://localhost:3000/update-property/${id}`, {
+    fetch(`https://real-estate-server-blue.vercel.app/update-property/${id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(updatedProperty),

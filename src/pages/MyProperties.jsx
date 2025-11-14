@@ -9,7 +9,9 @@ const MyProperties = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-properties?email=${user.email}`)
+    fetch(
+      `https://real-estate-server-blue.vercel.app/my-properties?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => {
         // console.log(data);
@@ -33,9 +35,12 @@ const MyProperties = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:3000/delete-property/${id}`, {
-          method: "DELETE",
-        })
+        fetch(
+          `https://real-estate-server-blue.vercel.app/delete-property/${id}`,
+          {
+            method: "DELETE",
+          }
+        )
           .then((res) => res.json())
           .then((data) => {
             if (data.deletedCount > 0) {
@@ -90,9 +95,12 @@ const MyProperties = () => {
                 >
                   Update
                 </Link>
-                <button 
-                onClick={() => handleDelete(property._id)}
-                 className="btn btn-sm btn-error">Delete</button>
+                <button
+                  onClick={() => handleDelete(property._id)}
+                  className="btn btn-sm btn-error"
+                >
+                  Delete
+                </button>
               </div>
             </div>
           </div>

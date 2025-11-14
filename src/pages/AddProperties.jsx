@@ -21,7 +21,7 @@ const AddProperties = () => {
       image: e.target.image.value,
     };
 
-    fetch("http://localhost:3000/models", {
+    fetch("https://real-estate-server-blue.vercel.app/models", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -30,7 +30,7 @@ const AddProperties = () => {
     })
       .then((res) => res.json())
       .then((data) => {
-        toast.success('Property Added Succesfully');
+        toast.success("Property Added Succesfully");
         navigate("/");
         console.log(data);
       })
@@ -133,7 +133,6 @@ const AddProperties = () => {
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Enter email"
-              
             />
           </div>
 

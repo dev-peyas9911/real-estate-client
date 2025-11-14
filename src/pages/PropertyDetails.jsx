@@ -25,7 +25,7 @@ const PropertyDetails = () => {
 
   // Load all ratings for this property
   useEffect(() => {
-    fetch(`http://localhost:3000/ratings/${_id}`)
+    fetch(`https://real-estate-server-blue.vercel.app/ratings/${_id}`)
       .then((res) => res.json())
       .then((data) => setRatings(data));
   }, [_id]);
@@ -49,7 +49,7 @@ const PropertyDetails = () => {
       reviewDate: new Date(),
     };
 
-    fetch("http://localhost:3000/add-rating", {
+    fetch("https://real-estate-server-blue.vercel.app/add-rating", {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify(newRating),

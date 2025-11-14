@@ -14,7 +14,7 @@ const AllProperties = () => {
   const fetchProperties = () => {
     setLoading(true);
     fetch(
-      `http://localhost:3000/all-properties?search=${search}&sortBy=postedDate&order=${sortOrder}`
+      `https://real-estate-server-blue.vercel.app/all-properties?search=${search}&sortBy=postedDate&order=${sortOrder}`
     )
       .then((res) => res.json())
       .then((data) => {

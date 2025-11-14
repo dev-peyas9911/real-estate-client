@@ -6,7 +6,9 @@ const MyRatings = () => {
   const [ratings, setRatings] = useState([]);
 
   useEffect(() => {
-    fetch(`http://localhost:3000/my-ratings?email=${user.email}`)
+    fetch(
+      `https://real-estate-server-blue.vercel.app/my-ratings?email=${user.email}`
+    )
       .then((res) => res.json())
       .then((data) => setRatings(data));
   }, [user]);

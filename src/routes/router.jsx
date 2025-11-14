@@ -23,12 +23,14 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch("http://localhost:3000/latest-properties"),
+        loader: () =>
+          fetch("https://real-estate-server-blue.vercel.app/latest-properties"),
       },
       {
         path: "/all-properties",
         element: <AllProperties></AllProperties>,
-        loader: () => fetch("http://localhost:3000/models"),
+        loader: () =>
+          fetch("https://real-estate-server-blue.vercel.app/models"),
       },
       {
         path: "/add-properties",
@@ -78,7 +80,9 @@ export const router = createBrowserRouter([
           </PrivateRoute>
         ),
         loader: ({ params }) =>
-          fetch(`http://localhost:3000/models/${params.id}`),
+          fetch(
+            `https://real-estate-server-blue.vercel.app/models/${params.id}`
+          ),
       },
     ],
   },
