@@ -45,6 +45,7 @@ export const router = createBrowserRouter([
             <MyProperties></MyProperties>
           </PrivateRoute>
         ),
+        
       },
       {
         path: "/my-ratings",

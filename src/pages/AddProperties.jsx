@@ -1,5 +1,6 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import { toast } from "react-toastify";
 
 const AddProperties = () => {
   const { user } = useContext(AuthContext);
@@ -27,6 +28,7 @@ const AddProperties = () => {
     })
       .then((res) => res.json())
       .then((data) => {
+        toast.success('Property Added Succesfully');
         console.log(data);
       })
       .catch((error) => {
@@ -34,7 +36,7 @@ const AddProperties = () => {
       });
   };
   return (
-    <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl">
+    <div className="card border border-gray-200 bg-base-100 w-full max-w-md mx-auto shadow-2xl rounded-2xl mt-10">
       <div className="card-body p-6 relative">
         <h2 className="text-2xl font-bold text-center mb-6">
           Add New Property
@@ -77,7 +79,7 @@ const AddProperties = () => {
               name="description"
               required
               rows="3"
-              className="textarea w-full rounded-2xl focus:border-0 focus:outline-gray-200 h-[250px]"
+              className="textarea w-full rounded-2xl focus:border-0 focus:outline-gray-200 h-[100px]"
               placeholder="Enter description"
             ></textarea>
           </div>
@@ -124,11 +126,11 @@ const AddProperties = () => {
             <input
               type="email"
               name="email"
-              defaultValue={user.email || "peyas@barmon.com"}
+              defaultValue={user.email}
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Enter email"
-              readOnly
+              
             />
           </div>
 

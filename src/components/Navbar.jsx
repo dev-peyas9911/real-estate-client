@@ -12,6 +12,7 @@ const Navbar = () => {
   // fake user for now
   // const user = null;
   const { user, setUser, signOutFunc } = useContext(AuthContext);
+  // console.log(user);
 
   const handleSignout = () => {
     // signOut(auth)

@@ -16,6 +16,11 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const googleProvider = new GoogleAuthProvider();
+  googleProvider.setCustomParameters({
+    prompt: "select_account",
+  });
+  googleProvider.addScope("email"); // 👈 explicitly request email
+  googleProvider.addScope("profile");
 
   // Sign up
   const createUserWithEmailAndPasswordFunc = (email, password) => {
@@ -79,7 +84,9 @@ const AuthProvider = ({ children }) => {
     };
   }, []);
 
-  return <AuthContext value={authInfo}>{children}</AuthContext>;
+  return (
+    <AuthContext.Provider value={authInfo}>{children}</AuthContext.Provider>
+  );
 };
 
 export default AuthProvider;

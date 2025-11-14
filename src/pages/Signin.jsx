@@ -36,7 +36,7 @@ const Signin = () => {
     // signInWithEmailAndPassword(auth, email, password)
     signInWithEmailAndPasswordFunc(email, password)
       .then((res) => {
-        // console.log(res.user);
+        console.log(res.user);
         setLoading(false);
         setUser(res.user);
         toast.success("Logged in succesfully");
@@ -54,7 +54,7 @@ const Signin = () => {
       .then((res) => {
         // console.log(res.user);
         setLoading(false);
-        setUser(res.user);
+        setUser(res?.user);
         toast.success("Logged in succesfully");
       })
       .catch((error) => {
