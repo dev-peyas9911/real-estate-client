@@ -22,7 +22,15 @@ const UpdateProperty = () => {
       });
   }, [id]);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center h-64">
+        <div
+          className="radial-progress animate-spin text-primary"
+          style={{ "--value": 70, "--size": "4rem", "--thickness": "4px" }}
+        ></div>
+      </div>
+    );
   if (!property) return <p>Property not found.</p>;
 
   // Handle form submit

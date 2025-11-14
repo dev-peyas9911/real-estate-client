@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router";
 
 const ModelCard = ({ model }) => {
-    const {propertyName, category, propertyPrice, location, image, userName, _id} = model;
+    const {propertyName, category, shortDescription, propertyPrice, location, image, userName, _id} = model;
   return (
     <div className="card bg-base-100 shadow-md hover:shadow-xl transition-shadow rounded-lg overflow-hidden">
       {/* Thumbnail Image */}
@@ -20,9 +20,11 @@ const ModelCard = ({ model }) => {
         <p className="text-sm text-gray-500">{category}</p>
         <p className="text-primary font-semibold text-lg">${propertyPrice}</p>
         <p className="text-sm text-gray-600">📍 {location}</p>
+        <p className="text-gray-400 font-semibold">{shortDescription}</p>
         <p className="text-sm text-gray-600">
           Posted by: <span className="font-semibold">{userName}</span>
         </p>
+        
 
         {/* See Details Button */}
         <div className="card-actions justify-end mt-3">

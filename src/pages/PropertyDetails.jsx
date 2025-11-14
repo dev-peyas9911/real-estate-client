@@ -6,10 +6,11 @@ import { AuthContext } from "../context/AuthContext";
 const PropertyDetails = () => {
   const data = useLoaderData(); // fetched from loader
   const property = data.result;
+  console.log(property);
   const {
     _id,
     propertyName,
-    description,
+    shortDescription,
     propertyPrice,
     location,
     category,
@@ -77,7 +78,7 @@ const PropertyDetails = () => {
       <div className="mt-6 space-y-3">
         <h2 className="text-3xl font-bold text-primary">{propertyName}</h2>
 
-        <p className="text-gray-600">{description}</p>
+        <p className="text-gray-600">{shortDescription}</p>
 
         <div className="grid md:grid-cols-2 gap-3 text-sm text-gray-700 mt-4">
           <p>

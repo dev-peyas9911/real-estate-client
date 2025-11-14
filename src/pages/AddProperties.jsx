@@ -133,6 +133,7 @@ const AddProperties = () => {
               required
               className="input w-full rounded-full focus:border-0 focus:outline-gray-200"
               placeholder="Enter email"
+              readOnly
             />
           </div>
 
