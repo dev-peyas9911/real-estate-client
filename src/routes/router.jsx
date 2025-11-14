@@ -11,7 +11,7 @@ import PrivateRoute from "../privateRoute/PrivateRoute";
 import AddProperties from "../pages/AddProperties";
 import LoadingSpinner from "../pages/LoadingSpinner";
 import PropertyDetails from "../pages/PropertyDetails";
-
+import UpdateProperty from "../pages/UpdateProperty";
 
 export const router = createBrowserRouter([
   {
@@ -23,7 +23,7 @@ export const router = createBrowserRouter([
       {
         index: true,
         Component: Home,
-        loader: () => fetch('http://localhost:3000/latest-properties')
+        loader: () => fetch("http://localhost:3000/latest-properties"),
       },
       {
         path: "/all-properties",
@@ -45,7 +45,14 @@ export const router = createBrowserRouter([
             <MyProperties></MyProperties>
           </PrivateRoute>
         ),
-        
+      },
+      {
+        path: "/update-property/:id",
+        element: (
+          <PrivateRoute>
+            <UpdateProperty />
+          </PrivateRoute>
+        ),
       },
       {
         path: "/my-ratings",
@@ -65,9 +72,14 @@ export const router = createBrowserRouter([
       },
       {
         path: "/properties/:id",
-        element: <PrivateRoute><PropertyDetails></PropertyDetails></PrivateRoute>,
-        loader: ({params}) => fetch(`http://localhost:3000/models/${params.id}`)
-      }
+        element: (
+          <PrivateRoute>
+            <PropertyDetails></PropertyDetails>
+          </PrivateRoute>
+        ),
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/models/${params.id}`),
+      },
     ],
   },
 ]);
