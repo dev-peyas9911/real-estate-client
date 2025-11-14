@@ -1,9 +1,11 @@
 import React, { useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router";
 
 const AddProperties = () => {
   const { user } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -29,6 +31,7 @@ const AddProperties = () => {
       .then((res) => res.json())
       .then((data) => {
         toast.success('Property Added Succesfully');
+        navigate("/");
         console.log(data);
       })
       .catch((error) => {

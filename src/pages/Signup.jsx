@@ -74,6 +74,7 @@ const Signup = () => {
         setLoading(false);
         setUser(res.user);
         toast.success("Logged in succesfully");
+        navigate('/');
       })
       .catch((error) => {
         toast.error(error.message);
