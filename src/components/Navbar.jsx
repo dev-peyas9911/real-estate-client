@@ -3,14 +3,13 @@ import { Link, NavLink } from "react-router";
 import { Sun, Moon } from "lucide-react";
 import { AuthContext } from "../context/AuthContext";
 import { toast } from "react-toastify";
-// import { AuthContext } from "../providers/AuthProvider"; // (for later when auth is ready)
+
 
 const Navbar = () => {
-  // const { user, logOut } = useContext(AuthContext); // (use this when you set up Firebase)
+  
   const [theme, setTheme] = useState("light");
 
-  // fake user for now
-  // const user = null;
+  
   const { user, setUser, signOutFunc } = useContext(AuthContext);
   // console.log(user);
 
