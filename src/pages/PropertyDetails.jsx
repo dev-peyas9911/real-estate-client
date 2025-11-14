@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLoaderData } from "react-router";
+import Swal from "sweetalert2";
+import { AuthContext } from "../context/AuthContext";
 
 const PropertyDetails = () => {
   const data = useLoaderData(); // fetched from loader
   const property = data.result;
   const {
+    _id,
     propertyName,
     description,
     propertyPrice,
@@ -14,6 +17,50 @@ const PropertyDetails = () => {
     postedDate,
     userName,
   } = property;
+
+  // ratings section
+  const { user } = useContext(AuthContext);
+
+  const [ratings, setRatings] = useState([]);
+
+  // Load all ratings for this property
+  useEffect(() => {
+    fetch(`http://localhost:3000/ratings/${_id}`)
+      .then((res) => res.json())
+      .then((data) => setRatings(data));
+  }, [_id]);
+
+  // Submit Rating
+  const handleRatingSubmit = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    const rating = form.rating.value;
+    const reviewText = form.reviewText.value;
+
+    const newRating = {
+      propertyId: _id,
+      propertyName,
+      propertyImage: image,
+      reviewerName: user?.displayName,
+      reviewerEmail: user?.email,
+      rating: Number(rating),
+      reviewText,
+      reviewDate: new Date(),
+    };
+
+    fetch("http://localhost:3000/add-rating", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(newRating),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        Swal.fire("Success!", "Your rating has been added", "success");
+        setRatings([...ratings, newRating]); // update instantly
+        form.reset();
+      });
+  };
 
   return (
     <div className="max-w-4xl mx-auto my-10 p-6 bg-base-100 shadow-lg rounded-xl">
@@ -53,6 +100,48 @@ const PropertyDetails = () => {
           <p className="font-semibold text-gray-800">
             Posted by: <span className="text-primary">{userName}</span>
           </p>
+        </div>
+      </div>
+      {/* ⭐ Ratings & Reviews Section */}
+      <div className="mt-10 border-t pt-6">
+        <h2 className="text-2xl font-bold mb-4">Ratings & Reviews</h2>
+
+        {/* Rating Form */}
+        <form onSubmit={handleRatingSubmit} className="space-y-3 mb-8">
+          <label className="font-semibold">Your Rating (1-5):</label>
+          <input
+            type="number"
+            name="rating"
+            min="1"
+            max="5"
+            required
+            className="input input-bordered w-32"
+          />
+
+          <textarea
+            name="reviewText"
+            required
+            placeholder="Write a short review..."
+            className="textarea textarea-bordered w-full"
+          ></textarea>
+
+          <button className="btn btn-primary">Submit Review</button>
+        </form>
+
+        {/* Show All Reviews */}
+        <div className="space-y-4">
+          {ratings.length === 0 && <p>No reviews yet</p>}
+
+          {ratings.map((r, index) => (
+            <div key={index} className="p-4 border rounded-lg bg-base-200">
+              <p className="font-bold">{r.reviewerName}</p>
+              <p className="text-yellow-500">⭐ {r.rating} / 5</p>
+              <p>{r.reviewText}</p>
+              <p className="text-xs opacity-70">
+                {new Date(r.reviewDate).toLocaleDateString()}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
